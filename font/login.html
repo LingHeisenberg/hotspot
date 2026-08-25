@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<head>
+<title>tchetcho's > login</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="shortcut icon" href="img/logo-2.png" type="image/x-png"/>
+<meta http-equiv="pragma" content="no-cache" />
+<meta http-equiv="expires" content="-1" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+<link rel="stylesheet" href="main.css">
+<link rel="stylesheet" href="responsivo.css">
+</head>
+
+<body>
+
+<div align="center">
+$(if chap-id)
+	<form name="sendin" action="$(link-login-only)" method="post">
+		<input type="hidden" name="username" />
+		<input type="hidden" name="password" />
+		<input type="hidden" name="dst" value="https://local.google.com/place?id=14233211007633553436&use=srp&ibp=gwp;0,7" />
+		<input type="hidden" name="popup" value="true" />
+	</form>
+<!-- dst $(link-orig) -->
+	<script type="text/javascript" src="/md5.js"></script>
+	<script type="text/javascript">
+	<!--
+	    function doLogin() {
+		document.sendin.username.value = document.login.username.value;
+		document.sendin.password.value = hexMD5('$(chap-id)' + document.login.password.value + '$(chap-challenge)');
+		document.sendin.submit();
+		return false;
+	    }
+	//-->
+</script>
+$(endif)
+  <div id="pub-data">
+    <div class="pub-data" id="pub">
+      <div id="pub-logo">
+        <div class="" id="inLogo"></div>
+      </div>
+      <p></p>
+      <button id="btn-desc">Inserir dados</button>
+     
+      <div id="pub-container">
+        
+  <!--  <a href="$(link-login-only)?target=lv&amp;dst=$(link-orig-esc)">Latviski</a>
+      		<div class="notice" style="color: #c1c1c1; font-size: 9px">Please log on to use the internet hotspot service<br />$(if trial == 'yes')Free trial available, <a style="color: #FF8080"href="$(link-login-only)?dst=$(link-orig-esc)&amp;username=T-$(mac-esc)">click here</a>.$(endif)</div><br /> -->
+      		<form name="login" action="$(link-login-only)" method="post"
+      					    $(if chap-id) onSubmit="return doLogin()" $(endif)>
+      						<input type="hidden" name="dst" value="$(link-orig)" />
+      						<input type="hidden" name="popup" value="true" />
+                <!--Formulario identado para o site -->
+
+           <div class="input" id="user"><input class="user"  name="username" type="text" value="$(username)" size="15" placeholder="Usuário" maxlength="6" required/> </div>
+           <div class="input" id="pass"> <input class="user"  name="password" type="password" size="15" placeholder="Senha" maxlength="6" required/></div>
+           <input id="btn-user" type="submit" value="Acessar" />
+     </form>
+
+        <br><br>
+        <div style="margin-top: -5px;color: #000; font-size: 14pt;letter-spacing:1px">
+          <b>Aberto de Segunda à Sexta<b><br><hr></hr>
+         <b>Horário: 8h às 16h</b>
+         <h6>Contactos:<br>(84/82)-3707673</h6>
+      </div>
+      <script type="text/javascript">
+
+        document.login.username.focus();
+
+       </script>
+      </div>
+     </div>
+   </div>
+  <!-- <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="YKKE4SJCQSWLU">
+<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form> -->
+
+ <div style="font-size:13pt;padding-bottom: 25px; margin-top: 4px;color:#fff;text-shadow:2px 1px 1px #000;">© 2020 Created by Mullnet-tech</div>
+ $(if error) $(error) $(endif)
+</div>
+</body>
+</html>

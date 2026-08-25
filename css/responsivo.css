@@ -1,0 +1,39 @@
+@media screen and (max-width:359px){
+#pub-data{width: 95%;}
+#pub{width: 100%;}
+}
+@media screen and (max-width:479px) and (min-width:360px){
+#pub-data{width: 95%;}
+#pub{width: 100%;}
+}
+@media screen and (min-width:480px){
+#pub-data{width: 50%;}
+#pub{width: 100%;}
+}
+@media screen and (min-width:768px) and (min-width: 1024px){
+  #pub-data{width: 22%;}
+  #pub{width: 100%;}
+}
+/* Smaller image version served exclusively to mobile layouts */
+@media (max-width: 768px) {
+  body {
+    background-image: url('img/restaurante.jpg');
+  }
+.input{
+  color: #000;
+  position: relative;
+  width: 95%;
+  height: 43px;
+  border:none;
+  font-size: 12pt;
+  font-family: stelio;
+}
+#btn-user{
+  position: relative;
+  width: 95%;
+  height: 43px;
+  border:none;
+  margin:6px;
+  font-size: 12pt;
+  font-family: stelio;
+}

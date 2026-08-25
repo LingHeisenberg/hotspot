@@ -1,0 +1,16 @@
+@media screen and (max-width:359px){
+#pub-data{width: 95%;}
+#pub{width: 100%;}
+}
+@media screen and (max-width:479px) and (min-width:360px){
+#pub-data{width: 95%;}
+#pub{width: 100%;}
+}
+@media screen and (min-width:480px){
+#pub-data{width: 50%;}
+#pub{width: 100%;}
+}
+@media screen and (min-width:768px) and (min-width: 1024px){
+  #pub-data{width: 22%;}
+  #pub{width: 100%;}
+}

@@ -1,0 +1,284 @@
+*{
+  margin: 0;
+}
+body{
+  min-width: 100%;
+  min-height: 100%;
+  margin:0;
+  padding: 0;
+  /*background-image: linear-gradient(to right, #868f96 0%, #596164 100%);*/
+  background-image: url(img/restaur.jpg);
+  background-size: cover; 
+  background-repeat: no-repeat;
+  background-position: center;
+  }
+
+#sectio{
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.64);
+}
+@font-face {
+    font-family:stelio;
+    src: url(font/JosefinSans-Light.ttf);
+}
+@font-face {
+    font-family:tche;
+    src: url(font/tche.ttf);
+}
+@font-face {
+    font-family:sun;
+    src: url(font/sunflowers.ttf);
+}
+@font-face {
+  font-family:mull;
+  src: url(font/Chamilla-Kids-Regular.ttf);
+}
+
+
+.info{
+  display: inline-block;
+  position: relative;
+}
+span{
+  font-family: tche;
+  font-size: 30pt;
+  font-weight: 800;
+  letter-spacing: 5px;
+
+}
+h6{
+  line-height: 2;
+  font-size: 12pt;
+}
+
+ #pub-data{
+  margin-top: 65px;
+  padding-bottom: 20px;
+}
+#pub-container{
+display: block;
+}
+.pub-data{
+  display: block;
+}
+#pub-logo{
+  position: relative;
+  width: 210px;
+  height: 210px;
+  float: left;
+  z-index: 2;
+  margin: -65px 0 5px -10px;
+  border-radius: 50%;
+  transform: rotate(15deg);
+  -ms-transform: rotate(15deg);
+  background-color: #ff4e50;
+  box-shadow: 0 10px 8px 0 rgba(0,0,0,0.2), 0 6px 14px 0 rgba(0,0,0,0.19);
+}
+#inLogo{
+  position: relative;
+  width: 90px;
+  height: 90px;
+  padding: 5px;
+  border-radius: 50%;
+  margin: 70px 0 0 63%;
+  transform: rotate(-15deg);
+  -ms-transform: rotate(-15deg);
+  border:5px solid #fff;
+  background-color: #fff;
+ /* background-color: rgba(0,0,0,0.50);*/
+  box-shadow: 0 10px 8px 0 rgba(0,0,0,0.2), 0 6px 14px 0 rgba(0,0,0,0.19);
+}
+#btn-desc{
+  top: 15px;
+  color: #000;
+  position: relative;
+  width: 90%;
+  height: 43px;
+  padding: 6px;
+  border:none;
+  margin:6px;
+  font-size: 12pt;
+  font-family: stelio;
+  font-weight: 500;
+  letter-spacing: 2px;
+  border-radius: 33px;
+  background-color: #fff;
+  box-shadow: 0 4px 6px 0 rgba(0,0,0,0.2), 0 4px 6px 0 rgba(0,0,0,0.19);
+}
+p{
+  font-size: 20pt;
+  font-family: stelio;
+  letter-spacing: 5px;
+  font-weight: 800;
+  /*text-shadow: 1px 1px 4px #000;*/
+}
+h6{
+  font-size: 10pt;
+  letter-spacing: 2px;
+}
+ #pub { 
+  color: #fff;
+  height:410px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+ }
+
+.user{
+position: relative;
+width: 80%;
+height: 99%;
+font-family: stelio;
+font-size: 13pt;
+color: #000;
+border: none;
+text-align: left;
+padding-left:12px;
+outline: none;
+float: right;
+border-radius: 33px;
+/*box-shadow: 0 4px 6px 0 rgba(0,0,0,0.2), 0 4px 6px 0 rgba(0,0,0,0.19);*/
+
+}
+#btn-user{
+  width: 306px;
+  height: 45px;
+  border:none;
+  margin-top: 8px;
+  font-family: stelio;
+  font-weight: 600;
+  color: #fff;
+  font-size: 11.5pt;
+  letter-spacing: 1px;
+  border-radius: 26px;
+  outline: none;
+  text-shadow: 2px 1px 2px #111;
+  /*background-image: linear-gradient(to right, #434343 0%, black 100%);*/
+  background-color: #F9D423;
+  /* IE9, iOS 3.2+ */background-image: -webkit-gradient(linear, 0% 80%, 100% 100%, color-stop(0,#ff4e50), color-stop(1, #F9D423));
+  /* Android 2.3 */ background-image: -webkit-repeating-linear-gradient(top left,  #ff4e50) 40%, #F9D423 100%);
+  /* IE10+ */  background-image: repeating-linear-gradient(to bottom right, #ff4e50) 40%, #F9D423 100%);
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2), 0 4px 10px 0 rgba(0,0,0,0.42);
+}
+
+.input{
+  display: block;
+  width: 305px;
+  height: 45px;
+  margin-top: 15px;
+  border-radius: 26px;
+  overflow:hidden;
+  background-color: #ff4e50;
+  box-shadow: 0 4px 6px 0 rgba(0,0,0,0.2), 0 4px 6px 0 rgba(0,0,0,0.19);
+
+}
+#user{
+  border: 1px solid #F9D423;
+  background-image: url(img/user1.png);
+  background-repeat: no-repeat;
+  background-position: 10px 11px;
+  background-size: 20px;
+}
+#voucher{
+  border: 1px solid #F9D423;
+  background-image: url(img/voucher1.png);
+  background-repeat: no-repeat;
+  background-position: 10px 11px;
+  background-size: 20px;
+}
+#pass{
+  border:1px solid #ff4e50;
+  background-image: url(img/lock1.png);
+  background-repeat: no-repeat;
+  background-position: 10px 4px;
+  background-size: 28px;
+}
+
+
+hr {
+  display: block;
+  margin: 10px 30px 5px 30px;
+  border-style: outset;
+  border-width: 1px;
+}
+h4{
+  margin-top:5px;
+  font-family:stelio;
+  font-size: 13pt;
+  color: #fff;
+  letter-spacing: 2px;
+  text-shadow: 0px 5px 5px #000;
+}
+.img_fluid{
+    width: 100%;
+    height: 100%;
+    size-adjust: 100%;
+    object-fit: contain;
+    position: relative;
+}
+.img_content{
+    width: 100%;
+    height: 320px;
+    background-color: #a2a09b;
+    size-adjust: 100%;
+    object-fit: cover;
+    position: relative;
+}
+/**/
+   .tab-container {
+      position: relative;
+      width: 97%;
+      overflow: hidden;
+    }
+
+ .tab-header {
+  width: 95%;
+  height: 40px;
+  margin-top: 20px;
+      display: flex;
+      cursor: pointer;
+      border-radius: 34px;
+      overflow: hidden;
+      background-color: rgba(235, 147, 147, 0.53);
+    }
+
+    .tab-header div {
+      flex: 1;
+      padding: 8px 10px;
+      text-align: center;
+      background: transparent;
+      transition: background 0.3s;
+      overflow: hidden;
+       border-radius: 35px;
+    }
+
+    .tab-header div.active {
+      color: #fff;
+      font-weight: bold;
+      background-color: #ff4e50;
+      border-radius: 35px;
+      transition: background-color 0.3s;
+      box-shadow: 0 10px 8px 0 rgba(0,0,0,0.2), 0 6px 14px 0 rgba(0,0,0,0.19);
+    }
+     .tab-content {
+      padding: 10px;
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+    .tab-link{
+      height: 40px;
+      border: none;
+      padding: 6px;
+      background-color: rgba(255, 255, 255, 0.8);
+    }
+
+

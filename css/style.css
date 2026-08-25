@@ -1,0 +1,210 @@
+  body { font-family: body, sans-serif;display: 
+    flex; justify-content: center; 
+    align-items: center; height: 100vh; 
+    margin: 0; 
+    background-image: url('../img/restaur.jpg');
+    background-size: cover; 
+    background-repeat: no-repeat;
+    background-position: center; 
+}
+    @font-face {
+    font-family:body;
+    src: url(../font/bodyfont.ttf);
+}
+  @font-face {
+    font-family:stelio;
+    src: url(../font/JosefinSans-Light.ttf);
+}
+:root { --primary-color: #434395; --text-color: #333; }
+        .login-box { 
+            height:auto;
+            margin:20px auto;
+            padding: 15px 10px;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+        }
+        .content{visibility: hidden;}
+        .tabs { display: flex; margin-bottom: 20px;}
+        .tab-btn { flex: 1; padding: 3px 15px; background: none; border: none; font-size: 14px; cursor: pointer; color: #FFF; font-weight: 500; border-radius: 22px;}
+        .tab-btn.active { font-family:body; color: #434395;  background-color: #fff; font-weight: bold;}
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        .input-group { margin-bottom: 15px;}
+        .input-group label { display: block; margin-bottom: 5px; font-size: 14px; color: #FFF }
+        .input-group input { width: 100%; height:45px; padding: 8px; text-align: center; backgroud-color:#fff; outline: unset; box-sizing: border-box; border:none; border-radius: 33px; box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px; }
+        .btn-submit { font-family: body; width: 100%; height:45px; padding: 10px; background-color: #2196F3; font-weight: 600; color: white; border: none; border-radius: 33px; font-size: 16px; cursor: pointer; box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;}
+        .btn-submit:disabled { background-color: #81C9FA; cursor: not-allowed; color: #000; }
+        .terms-container { margin-top: 15px; font-size: 13px; display: flex; align-items: flex-start; }
+        .terms-container input { margin-right: 8px; margin-top: 3px; }
+        .error-msg { font-weight:600; color: #fff; font-size: 12px; margin-bottom: 6px; text-align: center; height:30px; border-radius:33px; padding:5px;}
+		form {margin-top:15px;}
+
+    /*PLANOS DE SERVICOS*/
+    .pub_content{display: flex; overflow: hidden; justify-content: center; width: auto; height: 170px; padding:0; background-color: aliceblue; border-radius: 18px;
+    /*box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;*/}
+    .plans_card {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        width: 330px;
+        box-sizing: border-box;
+        border-left: 6px solid var(--primary-color);
+        transition: transform 0.2s;
+        margin-top: 10px;
+        min-height: 110px;
+        padding: 12px 14px;
+        background-color: #fff;
+        font-weight: 600;
+        border: none;
+        border-radius: 6px;
+        font-size: 16px;
+        cursor: pointer;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    }
+    .card_pacotes:active { transform: scale(0.98); }
+    .plans_info {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        flex: 1;
+        min-width: 0;
+    }
+    .plans_price {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        justify-content: center;
+        text-align: right;
+        flex-shrink: 0;
+    }
+    /*STATUS PAGE*/
+    #terms{font-family: body; font-weight: 550; color:#fff;}
+    .label{font-family: body; font-size: 13pt; font-weight: 700; padding-left: 14px;}
+    .main{display: flex; justify-content: center; width: 440px; height: auto; padding: 20px 10px; background-color: aliceblue; border-radius: 18px;}
+    .tabulas{ padding: 10px 15px; position:relative; background-color:  rgba(246, 244, 244, 0.919); border-radius: 6px;}
+    tr{margin-top: 8px; padding: 10px 5px; border-bottom: 1px solid #000;}
+    #logoff{width: 430px; height:45px; padding: 10px; background-color: #2196F3; font-weight: 500; color: white; border: none; border-radius: 33px; font-size: 16px; cursor: pointer; box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;}
+    #btn_mac{width: 430px; height:45px; padding: 10px; background-color: #2196F3; font-weight: 500; color: white; border: none; border-radius: 33px; font-size: 16px; cursor: pointer; box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;}
+
+    .wrap2{width: 100%; padding: 15px 10px; text-align: center; background-color: #2196F3; font-weight: 500; color: white; border: none; border-radius: 33px; font-size: 16px; cursor: pointer; box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;}
+    .pic{width: 30px; height: 30px; vertical-align: middle;}
+    #plan1{border-left: 3px solid #2196F3;}
+    #plan2{border-left: 3px solid #f68084;}
+    
+    .btn-banner{
+            display: block;
+            width: 100%;
+            max-width: 300px;
+            margin: 0 auto 20px auto;
+            padding: 6px;
+            border-radius: 33px;
+            color: #000;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            border: 1px solid #f93253;
+            transition: all 0.3s ease;
+            text-align: center;
+            box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+            background-color: #fff;
+          }
+          #footer{position: fixed; z-index: 100; bottom: 0; left: 0; width: 100%; height: 50px; background-color: #2196F3; color: #fff; display: flex; align-items: center; justify-content: center; font-family: body; font-weight: 500;}
+    /* Smaller image version served exclusively to mobile layouts */
+@media (max-width: 768px) {
+  body {
+    background-image: url('../img/restaurante.jpg');
+  }
+  .login-box{
+    width: 330px;
+  }
+}
+
+.pacote-card { background: #fff; border-radius: 12px; padding: 10px 20px; margin-bottom: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); display: flex; justify-content: space-between; align-items: center; border-left: 6px solid var(--primary-color); transition: transform 0.2s; }
+        
+        .plans_info h4 { margin: 0 0 5px 0; font-size: 18px; }
+        .plans_info span { font-size: 16px; color: #666; padding: 3px 0px; }
+        .plans_price { text-align: right; }
+        .label{display:block; font-size:9px; color:#666; text-align: left; padding: 3px 0px;}
+        .preco{padding-right:10px;}
+        .plans_price .preco { font-size: 18px; font-weight: 800; color: var(--primary-color); }
+        .btn-comprar { background: var(--primary-color); color: #fff; border: none; padding: 8px 15px; border-radius: 26px; font-weight: 600; cursor: pointer; margin-top: 5px; }
+        .btn-comprar:hover {  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;}
+        /*MODAL DE PAGAMENTO*/
+
+        .slider-container {
+    max-width: 330px;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    position: relative;
+}
+
+.slides {
+    display: flex;
+    transition: transform 0.5s ease-in-out; /* Efeito de transição suave */
+    width: 100%;
+}
+
+.slide {
+    min-width: 100%; /* Cada slide ocupa 100% da largura */
+    height: 100%;
+}
+
+.slide img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover; /* Ajusta a imagem para cobrir o slide */
+}
+.erro_manssege{
+    display: block;
+    position: relative;
+    margin: 10px auto;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #f44336; /* Cor de fundo vermelha */
+    color: white; /* Cor do texto branca */
+    padding: 3px 10px;
+    border-radius: 1px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    z-index: 1001; /* Certifique-se de que esteja acima de outros elementos */}
+
+ /*REPORTE BOX*/
+ .report_box{
+    width: auto;
+    display: none;
+    position: relative;
+    left: 50%;
+    margin: 5px auto;
+    text-align: center;
+    transform: translateX(-50%);
+    color: rgb(202, 10, 10); /* Cor do texto branca */
+    padding: 5px 10px;
+    border-radius: 4px;
+    background-color: #111111e3; /* Cor de fundo vermelha */
+    /*box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);*/
+    z-index: 1001; /* Certifique-se de que esteja acima de outros elementos */}
+    .pub_info{
+    margin: 10px auto;
+    padding: 4px;
+    text-align: center;
+    border-radius: 33px;
+    background-color: #0f0b0be3;
+
+    } 
+    .footer { text-align: center; font-size: 11px; color: #999; margin-top: 3px; }
+ /* Modal de Pagamento */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); justify-content: center; align-items: center; z-index: 1000; }
+        .modal-content { background: white; padding: 25px; border-radius: 8px; width: 85%; max-width: 360px; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+        .modal h3 { margin-top: 0; }
+        .input-telefone { width: 100%; padding: 12px; margin: 15px 0; border: 2px solid #ddd; border-radius: 26px; font-size: 18px; text-align: center; box-sizing: border-box; }
+        .input-telefone:focus { border-color: var(--primary-color); outline: none; }
+        .btn-pagar { width: 100%; padding: 12px; background: #25d366; color: white; border: none; border-radius: 26px; font-size: 16px; font-weight: bold; cursor: pointer; }
+        .btn-fechar { margin-top: 10px; background: none; border: none; color: #888; cursor: pointer; font-size: 14px; }
+        .rodape { text-align: center; font-size: 11px; color: #999; margin-top: 3px; }
+        
