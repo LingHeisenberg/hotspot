@@ -1,72 +1,95 @@
-async function request(path, options = {}) {
-  const response = await fetch(path, {
-    headers: {
-      'Content-Type': 'application/json',
-      ...(options.token ? { Authorization: `Bearer ${options.token}` } : {}),
-      ...(options.headers || {})
-    },
-    ...options,
-    body: options.body ? JSON.stringify(options.body) : undefined
-  });
+import axios from 'axios';
 
-  const contentType = response.headers.get('content-type') || '';
+const configuredBaseUrl = String(import.meta.env.VITE_API_URL || '').trim();
 
-  if (!response.ok) {
-    const errorBody = contentType.includes('application/json') ? await response.json() : {};
-    throw new Error(errorBody.message || 'Pedido recusado pelo servidor.');
+const api = axios.create({
+  baseURL: configuredBaseUrl || undefined,
+  headers: {
+    'Content-Type': 'application/json'
   }
+});
 
-  if (contentType.includes('application/json')) {
-    return response.json();
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    const message =
+      error.response?.data?.message ||
+      error.response?.data?.error ||
+      error.message ||
+      'Nao foi possivel comunicar com o servidor.';
+    const normalized = new Error(message);
+
+    normalized.status = error.response?.status;
+    normalized.reason = error.response?.data?.reason;
+    normalized.data = error.response?.data;
+
+    return Promise.reject(normalized);
   }
+);
 
-  return response.text();
+export async function getPlans() {
+  const response = await api.get('/api/plans');
+  return response.data;
 }
 
-export function getPlans() {
-  return request('/api/plans');
+export async function createOrder(payload) {
+  const response = await api.post('/api/orders', payload);
+  return response.data;
 }
 
-export function createOrder(payload) {
-  return request('/api/orders', {
-    method: 'POST',
-    body: payload
+export async function getOrderStatus(reference) {
+  const response = await api.get(
+    `/api/orders/${encodeURIComponent(reference)}/status`
+  );
+
+  return response.data;
+}
+
+export async function adminLogin(password) {
+  const response = await api.post('/api/admin/login', {
+    password
   });
+
+  return response.data;
 }
 
-export function getOrderStatus(reference) {
-  return request(`/api/orders/${encodeURIComponent(reference)}/status`);
-}
-
-export function adminLogin(password) {
-  return request('/api/admin/login', {
-    method: 'POST',
-    body: { password }
-  });
-}
-
-export function getAdminSummary(token) {
-  return request('/api/admin/summary', { token });
-}
-
-export function generateVouchers(token, payload) {
-  return request('/api/admin/vouchers/generate', {
-    method: 'POST',
-    token,
-    body: payload
-  });
-}
-
-export async function downloadAdminCsv(token, inicio, fim) {
-  const response = await fetch(`/api/admin/export.csv?inicio=${inicio}&fim=${fim}`, {
+export async function getAdminSummary(token) {
+  const response = await api.get('/api/admin/summary', {
     headers: {
       Authorization: `Bearer ${token}`
     }
   });
 
-  if (!response.ok) {
-    throw new Error('Nao foi possivel exportar o relatorio.');
-  }
-
-  return response.blob();
+  return response.data;
 }
+
+export async function generateVouchers(token, payload) {
+  const response = await api.post(
+    '/api/admin/vouchers/generate',
+    payload,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    }
+  );
+
+  return response.data;
+}
+
+export async function downloadAdminCsv(token, inicio, fim) {
+  const response = await api.get('/api/admin/export.csv', {
+    params: {
+      inicio,
+      fim
+    },
+    headers: {
+      Authorization: `Bearer ${token}`
+    },
+    responseType: 'blob'
+  });
+
+  return response.data;
+}
+
+export default api;
