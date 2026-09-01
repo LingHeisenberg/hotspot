@@ -37,6 +37,11 @@ export async function createOrder(payload) {
   return response.data;
 }
 
+export async function startFreeTrial(payload) {
+  const response = await api.post('/api/free-trials/start', payload);
+  return response.data;
+}
+
 export async function getOrderStatus(reference) {
   const response = await api.get(
     `/api/orders/${encodeURIComponent(reference)}/status`

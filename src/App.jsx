@@ -3,6 +3,7 @@ import {
   CheckCircle2,
   CreditCard,
   Download,
+  Gift,
   Loader2,
   LockKeyhole,
   LogOut,
@@ -18,7 +19,8 @@ import {
   generateVouchers,
   getAdminSummary,
   getOrderStatus,
-  getPlans
+  getPlans,
+  startFreeTrial
 } from './api.js';
 import { hexMD5 } from './utils/md5.js';
 import backgroundImage from '../img/restaur.jpg';
@@ -55,6 +57,8 @@ function PortalPage() {
   const [plans, setPlans] = useState([]);
   const [activeTab, setActiveTab] = useState('horas');
   const [selectedPlan, setSelectedPlan] = useState(null);
+  const [freeTrialAccess, setFreeTrialAccess] = useState(null);
+  const [freeTrialLoading, setFreeTrialLoading] = useState(false);
   const [error, setError] = useState(params.get('error') || '');
   const [loadingPlans, setLoadingPlans] = useState(true);
 
@@ -78,6 +82,20 @@ function PortalPage() {
 
   const visiblePlans = useMemo(() => plans.filter((plan) => plan.categoria === activeTab), [plans, activeTab]);
 
+  async function startFreeAccess() {
+    setFreeTrialLoading(true);
+    setError('');
+
+    try {
+      const trial = await startFreeTrial(hotspot);
+      setFreeTrialAccess(trial);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setFreeTrialLoading(false);
+    }
+  }
+
   return (
     <Shell>
       <main className="mx-auto flex min-h-screen w-full max-w-[390px] items-center px-4 py-5">
@@ -92,8 +110,17 @@ function PortalPage() {
             </div>
           ) : null}
 
-          <div className="my-3 rounded-full bg-ink/90 px-3 py-1.5 text-center text-sm font-semibold text-white">
-            Escolha um plano abaixo
+          <div className="my-3 flex items-center gap-2 rounded-full bg-ink/90 p-1 pl-3 text-sm font-semibold text-white">
+            <span className="min-w-0 flex-1 text-center">Escolha um plano abaixo</span>
+            <button
+              type="button"
+              onClick={startFreeAccess}
+              disabled={freeTrialLoading}
+              className="inline-flex h-8 shrink-0 items-center justify-center gap-1 rounded-full bg-white px-3 text-xs font-black text-ink shadow-sm transition hover:bg-slate-100 disabled:cursor-not-allowed disabled:bg-slate-200 disabled:text-slate-500"
+            >
+              {freeTrialLoading ? <Loader2 size={13} className="animate-spin" /> : <Gift size={13} />}
+              15 Minutos Gratis
+            </button>
           </div>
 
           <div className="mb-3 grid grid-cols-3 rounded-full bg-white/10 p-1">
@@ -135,6 +162,14 @@ function PortalPage() {
           hotspot={hotspot}
           onClose={() => setSelectedPlan(null)}
           onError={(message) => setError(message)}
+        />
+      ) : null}
+
+      {freeTrialAccess ? (
+        <FreeTrialAccessModal
+          trial={freeTrialAccess}
+          hotspot={hotspot}
+          onClose={() => setFreeTrialAccess(null)}
         />
       ) : null}
     </Shell>
@@ -289,6 +324,69 @@ function PaymentModal({ plan, hotspot, onClose, onError }) {
           Cancelar
         </button>
       </form>
+    </div>
+  );
+}
+
+function FreeTrialAccessModal({ trial, hotspot, onClose }) {
+  const formRef = useRef(null);
+  const loginUrl =
+    trial.mikrotikLoginUrl ||
+    hotspot.loginUrl ||
+    import.meta.env.VITE_MIKROTIK_LOGIN_URL ||
+    'http://10.5.50.1/login';
+  const linkorig = trial.linkorig || hotspot.linkorig || 'https://www.google.com/';
+  const loginPassword =
+    hotspot.chapId && hotspot.chapChallenge && trial.senha
+      ? hexMD5(`${hotspot.chapId}${trial.senha}${hotspot.chapChallenge}`)
+      : trial.senha || '';
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      formRef.current?.submit();
+    }, 1800);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/55 px-4">
+      <section className="w-full max-w-[390px] rounded-lg bg-white p-6 text-center shadow-soft">
+        <CheckCircle2 className="mx-auto text-green-600" size={46} />
+        <h2 className="mt-4 text-2xl font-black text-green-700">Teste gratis ativo</h2>
+        <p className="mt-3 text-sm font-semibold leading-6 text-slate-600">
+          Acesso liberado por {trial.minutes || 15} minutos. A entrar no Hotspot automaticamente.
+        </p>
+
+        <div className="mt-5 rounded-lg border-2 border-dashed border-sky-400 bg-sky-50 p-4 text-left text-sm font-bold text-sky-900">
+          <p>Utilizador: <span className="font-mono text-lg text-ink">{trial.voucher}</span></p>
+          <p>Senha: <span className="font-mono text-lg text-ink">{trial.senha}</span></p>
+        </div>
+
+        <div className="mt-5 flex flex-col gap-2 sm:flex-row sm:justify-center">
+          <button
+            type="button"
+            onClick={() => formRef.current?.submit()}
+            className="inline-flex h-11 items-center justify-center rounded-md bg-primary px-4 text-sm font-black text-white"
+          >
+            Entrar agora
+          </button>
+          <button
+            type="button"
+            onClick={onClose}
+            className="inline-flex h-11 items-center justify-center rounded-md bg-slate-100 px-4 text-sm font-black text-slate-600"
+          >
+            Fechar
+          </button>
+        </div>
+
+        <form ref={formRef} action={loginUrl} method="post" className="hidden">
+          <input type="hidden" name="username" value={trial.voucher || ''} readOnly />
+          <input type="hidden" name="password" value={loginPassword} readOnly />
+          <input type="hidden" name="dst" value={linkorig} readOnly />
+          <input type="hidden" name="popup" value="true" readOnly />
+        </form>
+      </section>
     </div>
   );
 }
@@ -590,12 +688,13 @@ function AdminPage() {
 
         {error ? <p className="mt-4 rounded-md bg-red-50 px-4 py-3 font-bold text-red-700">{error}</p> : null}
 
-        <section className="mt-5 grid gap-4 md:grid-cols-5">
+        <section className="mt-5 grid gap-4 md:grid-cols-6">
           <Metric label="Faturacao total" value={`${money(summary?.metrics?.faturamento || 0)} MT`} icon={<CreditCard size={20} />} />
           <Metric label="Vouchers vendidos" value={summary?.metrics?.vendas || 0} icon={<ShieldCheck size={20} />} />
           <Metric label="Conversao" value={`${summary?.metrics?.conversao || 0}%`} icon={<CheckCircle2 size={20} />} />
           <Metric label="Disponiveis" value={summary?.metrics?.disponiveis || 0} icon={<Wifi size={20} />} />
           <Metric label="Pendentes" value={summary?.metrics?.pendentes || 0} icon={<Loader2 size={20} />} />
+          <Metric label="Testes gratis" value={summary?.metrics?.testesGratisAtivos || 0} icon={<Gift size={20} />} />
         </section>
 
         <section className="mt-5 rounded-lg bg-white p-5 shadow-sm">
