@@ -330,12 +330,16 @@ function PaymentModal({ plan, hotspot, onClose, onError }) {
 
 function FreeTrialAccessModal({ trial, hotspot, onClose }) {
   const formRef = useRef(null);
+  const activated = Boolean(trial.access?.activated);
   const loginUrl =
     trial.mikrotikLoginUrl ||
     hotspot.loginUrl ||
     import.meta.env.VITE_MIKROTIK_LOGIN_URL ||
     'http://10.5.50.1/login';
   const linkorig = trial.linkorig || hotspot.linkorig || 'https://www.google.com/';
+  const insecureHttpLogin =
+    window.location.protocol === 'https:' &&
+    String(loginUrl).toLowerCase().startsWith('http://');
   const loginPassword =
     hotspot.chapId && hotspot.chapChallenge && trial.senha
       ? hexMD5(`${hotspot.chapId}${trial.senha}${hotspot.chapChallenge}`)
@@ -343,19 +347,32 @@ function FreeTrialAccessModal({ trial, hotspot, onClose }) {
 
   useEffect(() => {
     const timer = setTimeout(() => {
+      if (activated) {
+        window.location.href = linkorig;
+        return;
+      }
+
+      if (insecureHttpLogin) {
+        return;
+      }
+
       formRef.current?.submit();
     }, 1800);
 
     return () => clearTimeout(timer);
-  }, []);
+  }, [activated, insecureHttpLogin, linkorig]);
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/55 px-4">
       <section className="w-full max-w-[390px] rounded-lg bg-white p-6 text-center shadow-soft">
         <CheckCircle2 className="mx-auto text-green-600" size={46} />
-        <h2 className="mt-4 text-2xl font-black text-green-700">Teste gratis ativo</h2>
+        <h2 className="mt-4 text-2xl font-black text-green-700">
+          {activated ? 'Acesso gratis ativo' : 'Teste gratis criado'}
+        </h2>
         <p className="mt-3 text-sm font-semibold leading-6 text-slate-600">
-          Acesso liberado por {trial.minutes || 15} minutos. A entrar no Hotspot automaticamente.
+          {activated
+            ? `Acesso liberado por ${trial.minutes || 15} minutos. A redirecionar.`
+            : trial.access?.message || `Use este voucher para entrar por ${trial.minutes || 15} minutos.`}
         </p>
 
         <div className="mt-5 rounded-lg border-2 border-dashed border-sky-400 bg-sky-50 p-4 text-left text-sm font-bold text-sky-900">
@@ -363,13 +380,26 @@ function FreeTrialAccessModal({ trial, hotspot, onClose }) {
           <p>Senha: <span className="font-mono text-lg text-ink">{trial.senha}</span></p>
         </div>
 
+        {!activated && insecureHttpLogin ? (
+          <p className="mt-4 rounded-md border border-amber-200 bg-amber-50 px-3 py-2 text-xs font-bold leading-5 text-amber-800">
+            O navegador pode pedir confirmacao antes de enviar para o login do MikroTik.
+          </p>
+        ) : null}
+
         <div className="mt-5 flex flex-col gap-2 sm:flex-row sm:justify-center">
           <button
             type="button"
-            onClick={() => formRef.current?.submit()}
+            onClick={() => {
+              if (activated) {
+                window.location.href = linkorig;
+                return;
+              }
+
+              formRef.current?.submit();
+            }}
             className="inline-flex h-11 items-center justify-center rounded-md bg-primary px-4 text-sm font-black text-white"
           >
-            Entrar agora
+            {activated ? 'Continuar' : 'Entrar no MikroTik'}
           </button>
           <button
             type="button"
